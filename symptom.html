@@ -87,7 +87,7 @@
     .symptom-list {
       display: grid;
       grid-template-columns: 6mm max-content 1fr;
-      column-gap: 40px;
+      column-gap: 0;
       border-bottom: 1px solid #4f3314;
     }
 
@@ -95,13 +95,20 @@
       display: contents;
     }
 
+    .symptom-dot-cell {
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #4f3314;
+      padding-right: 20px;
+      cursor: pointer;
+    }
+
     .symptom-dot-indicator {
       width: 6mm;
       height: 6mm;
       border-radius: 50%;
       background-color: #4f3314;
-      align-self: center;
-      cursor: pointer;
+      flex-shrink: 0;
     }
 
     .symptom-name {
@@ -113,7 +120,7 @@
       display: flex;
       align-items: center;
       border-top: 1px solid #4f3314;
-      padding: 8px 0;
+      padding: 8px 20px 8px 0;
       cursor: pointer;
     }
 
@@ -219,8 +226,11 @@
       const item = document.createElement('div');
       item.className = 'symptom-item' + (s.name === activeName ? ' active' : '');
 
+      const dotCell = document.createElement('div');
+      dotCell.className = 'symptom-dot-cell';
       const dot = document.createElement('div');
       dot.className = 'symptom-dot-indicator';
+      dotCell.appendChild(dot);
 
       const name = document.createElement('div');
       name.className = 'symptom-name';
@@ -230,14 +240,14 @@
       def.className = 'symptom-def';
       def.textContent = s.def;
 
-      item.appendChild(dot);
+      item.appendChild(dotCell);
       item.appendChild(name);
       item.appendChild(def);
 
       const navigate = () => {
         window.location.href = 'index.html?symptom=' + encodeURIComponent(s.name);
       };
-      dot.addEventListener('click', navigate);
+      dotCell.addEventListener('click', navigate);
       name.addEventListener('click', navigate);
       def.addEventListener('click', navigate);
 

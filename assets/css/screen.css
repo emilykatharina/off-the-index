@@ -1,30 +1,114 @@
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   padding: 20px;
-  font-size: 28px;
+  font-size: 21pt;
   background-color: #5194ed;;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #5194ed;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  min-height: 320px;
+}
+
+body.inverted .site-header {
+  background-color: #4f3314;
+}
+
+.header-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.nav-circles {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  z-index: 100;
+}
+
+.nav-circle {
+  width: 45mm;
+  height: 45mm;
+  border-radius: 50%;
+  border: 5pt solid #4f3314;
+  background-color: #4f3314;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "MonumentGrotesk", sans-serif;
+  font-size: 24pt;
+  line-height: 30pt;
+  color: #5194ed;
+  text-decoration: none;
+}
+
+body.inverted .nav-circle {
+  border-color: #5194ed;
+  background-color: #5194ed;
+  color: #4f3314;
+}
+
+.nav-circle.active {
+  font-weight: 500;
 }
 
 .site-label {
   font-family: "RemixB", sans-serif;
-  font-size: 6rem;
+  font-size: 96pt;
+  line-height: 96pt;
   color: #4f3314;
-  text-align: center;
-  margin-top: 20px;
+  text-align: left;
 }
 
 h1{
   font-family: "MonumentGrotesk", sans-serif;
-  text-align: center;
-  font-size: 6rem;
+  text-align: left;
+  font-size: 48pt;
+  line-height: 62pt;
   font-style: normal;
   color: #4f3314;
   margin-top: 20px;
   margin-bottom: 20px;
+  max-width: 50%;
+  text-indent: 24mm;
+}
+
+body.inverted {
+  background-color: #4f3314;
+}
+
+body.inverted h1,
+body.inverted .site-label,
+body.inverted .card-name,
+body.inverted .card-ages,
+body.inverted .card-brief-outline,
+body.inverted .card-details,
+body.inverted .card-details-summary,
+body.inverted .detail-row {
+  color: #5194ed;
+}
+
+body.inverted .katalog-row:not(.active-row) {
+  visibility: hidden;
+}
+
+body.inverted .katalog-row.active-row .card:not(.active-card) {
+  visibility: hidden;
 }
 
 img{
@@ -32,8 +116,28 @@ img{
 }
 
 .katalog-grid {
+  display: block;
+}
+
+.katalog-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+
+.detail-row {
+  display: none;
+  column-count: 3;
+  width: 100%;
+  text-align: left;
+  font-family: "RemixB";
+  font-size: 36pt;
+  line-height: 43pt;
+  color: #4f3314;
+  padding: 15px;
+}
+
+.detail-row.active {
+  display: block;
 }
 
 .card {
@@ -41,11 +145,13 @@ img{
 }
 
 .card-name {
-  display: flex;
-  justify-content: center;
+  display: block;
+  text-align: left;
   font-family: "RemixB", sans-serif;
-  font-size: 5rem;
-  font-weight: 600;
+  font-size: 60pt;
+  line-height: 60pt;
+  font-weight: 400;
+  letter-spacing: -0.05em;
   margin-top: 20px;
   margin-bottom: 5px;
   color: #4f3314;
@@ -54,40 +160,44 @@ img{
 .card-content-grid {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 1rem;
 }
 
-.card-age-at-interview, .card-age-at-diagnose {
-  font-size: 3rem;
-  padding-left: 5px;
+.card-ages {
+  font-size: 36pt;
+  line-height: 43pt;
   font-family: "MonumentGrotesk", sans-serif;
   font-weight: 300;
   color: #4f3314;
 }
 
 .card-brief-outline {
-  text-align: center;
+  text-align: left;
+  text-indent: 24mm;
   font-family: "MonumentGrotesk";
-  font-size: 3rem;
+  font-size: 36pt;
+  line-height: 43pt;
   font-style: normal;
   margin-top: 5px;
   color: #4f3314;
 }
 
 .card-details {
-  text-align: center;
+  text-align: left;
   font-family: "RemixB";
-  font-size: 3rem;
+  font-size: 36pt;
+  line-height: 43pt;
   font-style: normal;
   margin-top: 5px;
   color: #4f3314;
 }
 
 .card-details-summary {
-  text-align: center;
+  text-align: left;
   font-family: "RemixB";
-  font-size: 3rem;
+  font-size: 36pt;
+  line-height: 43pt;
   font-style: normal;
   margin-top: 5px;
   color: #4f3314;
@@ -96,3 +206,36 @@ img{
 details[open] .card-details-summary {
   font-style: italic;
 }
+
+.symptom-dot {
+  position: fixed;
+  width: 30mm;
+  height: 30mm;
+  border-radius: 50%;
+  background: #5194ed;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.symptom-label {
+  position: absolute;
+  left: calc(30mm + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: "MonumentGrotesk", sans-serif;
+  font-weight: 400;
+  font-size: 36pt;
+  line-height: 36pt;
+  color: #5194ed;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.symptom-dot:hover .symptom-label {
+  opacity: 1;
+}
+
+

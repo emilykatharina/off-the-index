@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symptom Index</title>
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #5194ed;
+      padding: 20px;
+      font-family: "MonumentGrotesk", sans-serif;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background-color: #5194ed;
+      padding-top: 20px;
+      padding-bottom: 40px;
+      min-height: 320px;
+    }
+
+    .nav-circles {
+      position: fixed;
+      top: 40px;
+      right: 40px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      z-index: 100;
+    }
+
+    .nav-circle {
+      width: 45mm;
+      height: 45mm;
+      border-radius: 50%;
+      border: 5pt solid #4f3314;
+      background-color: #4f3314;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-family: "MonumentGrotesk", sans-serif;
+      font-size: 24pt;
+      line-height: 30pt;
+      color: #5194ed;
+      text-decoration: none;
+    }
+
+    .nav-circle.active {
+      font-weight: 500;
+    }
+
+    .site-label {
+      font-family: "RemixB", sans-serif;
+      font-size: 96pt;
+      line-height: 96pt;
+      color: #4f3314;
+      text-align: left;
+    }
+
+    .site-label a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h1 {
+      font-family: "MonumentGrotesk", sans-serif;
+      font-size: 48pt;
+      line-height: 62pt;
+      font-style: normal;
+      color: #4f3314;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      text-indent: 24mm;
+    }
+
+    .symptom-list-wrap {
+      padding: 0 20px 20px 60px;
+    }
+
+    .symptom-list {
+      display: grid;
+      grid-template-columns: 15mm max-content 1fr;
+      column-gap: 40px;
+      border-bottom: 1px solid #4f3314;
+    }
+
+    .symptom-item {
+      display: contents;
+    }
+
+    .symptom-dot-indicator {
+      width: 15mm;
+      height: 15mm;
+      border-radius: 50%;
+      background-color: #4f3314;
+      align-self: center;
+      cursor: pointer;
+    }
+
+    .symptom-name {
+      font-family: "MonumentGrotesk", sans-serif;
+      font-weight: 400;
+      font-size: 48pt;
+      line-height: 57pt;
+      color: #4f3314;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #4f3314;
+      padding: 16px 0;
+      cursor: pointer;
+    }
+
+    .symptom-item.active .symptom-name {
+      font-weight: 500;
+    }
+
+    .symptom-def {
+      font-family: "MonumentGrotesk", sans-serif;
+      font-weight: 400;
+      font-size: 48pt;
+      line-height: 57pt;
+      color: #4f3314;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid #4f3314;
+      padding: 16px 0;
+      cursor: pointer;
+    }
+
+    .symptom-name:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-circles">
+    <a href="symptom.html" class="nav-circle active">Symptoms</a>
+    <a href="sources.html" class="nav-circle">Sources</a>
+    <a href="imprint.html" class="nav-circle">Imprint</a>
+  </nav>
+  <div class="site-header">
+    <p class="site-label"><a href="index.html">Off The Index</a></p>
+    <h1>Symptoms</h1>
+  </div>
+
+  <div class="symptom-list-wrap">
+    <div class="symptom-list" id="symptom-list"></div>
+  </div>
+
+  <script>
+    const SYMPTOMS = [
+      { name: 'Depression',             def: 'A mood disorder marked by persistent low mood and/or loss of interest or pleasure, with associated cognitive and physical symptoms.' },
+      { name: 'Anhedonia',              def: 'Reduced ability to experience pleasure or diminished interest in usually rewarding activities.' },
+      { name: 'Numbness',               def: 'Emotional numbness is a reduced ability to feel emotions; physically, numbness means reduced sensation.' },
+      { name: 'Euphoria',               def: 'An abnormally elevated, expansive, or intensely pleasant mood.' },
+      { name: 'Irritability',           def: 'A lowered threshold for frustration or anger, with easy provocation of hostile or annoyed affect.' },
+      { name: 'Instability',            def: 'Marked fluctuation in mood, affect, or behavior over time.' },
+      { name: 'Suicidality',            def: 'Presence of suicidal thoughts, urges, plans, or behaviors.' },
+      { name: 'Hopelessness',           def: 'A pessimistic belief that the future will not improve or that outcomes will be negative.' },
+      { name: 'Anxiety',                def: 'A state of excessive worry, fear, or apprehension about possible future threats.' },
+      { name: 'Panic',                  def: 'A sudden surge of intense fear or discomfort with strong physical symptoms such as palpitations or shortness of breath.' },
+      { name: 'Social-anxiety',         def: 'Fear of negative evaluation or embarrassment in social situations, leading to avoidance or distress.' },
+      { name: 'Agoraphobia',            def: 'Fear of situations where escape may be difficult or help unavailable, often causing avoidance.' },
+      { name: 'Paranoia',               def: 'Suspiciousness or persecutory thinking, often involving unrealistic beliefs that others intend harm.' },
+      { name: 'Racing-thoughts',        def: 'Subjective experience of unusually rapid, uncontrollable, or crowded thoughts.' },
+      { name: 'Cognition',              def: 'Mental processes involved in thinking, attention, memory, language, and executive function.' },
+      { name: 'Rumination',             def: 'Repetitive, passive, and hard-to-stop thinking about distress, causes, or consequences.' },
+      { name: 'Perfectionism',          def: 'A pattern of setting excessively high standards and being overly critical of mistakes.' },
+      { name: 'Obsessions',             def: 'Recurrent, intrusive, unwanted thoughts, images, or urges that cause distress.' },
+      { name: 'Delusions',              def: 'Fixed false beliefs that are held despite clear contradictory evidence.' },
+      { name: 'Amnesia',                def: 'Partial or complete loss of memory for past events or information.' },
+      { name: 'Auditory Hallucinations',def: 'Hearing sounds or voices that are not actually present.' },
+      { name: 'Visual Hallucinations',  def: 'Seeing people, objects, or scenes that are not actually present.' },
+      { name: 'Depersonalization',      def: 'A sense of detachment from one\'s self, body, or mental processes.' },
+      { name: 'Psychosis',              def: 'A state marked by impaired reality testing, often with delusions, hallucinations, or disorganized thinking.' },
+      { name: 'Self-esteem',            def: 'A person\'s overall evaluation of their own worth or value.' },
+      { name: 'Dysmorphia',             def: 'Distorted preoccupation with perceived flaws in appearance, often minor or unnoticeable to others.' },
+      { name: 'Identity',               def: 'A person\'s stable sense of who they are, including self-concept and continuity over time.' },
+      { name: 'Shame',                  def: 'A painful self-conscious emotion involving feeling flawed, exposed, or unworthy.' },
+      { name: 'Self-harm',              def: 'Intentional injury to one\'s own body, with or without suicidal intent.' },
+      { name: 'Restriction',            def: 'In eating-disorder context, intentional limitation of food intake.' },
+      { name: 'Bingeing',               def: 'Eating an unusually large amount of food with a sense of loss of control.' },
+      { name: 'Purging',                def: 'Behaviors intended to remove consumed food, such as vomiting or misuse of laxatives.' },
+      { name: 'Over-exercising',        def: 'Excessive exercise driven by weight, shape, or compulsive concerns, beyond healthy activity.' },
+      { name: 'Coping',                 def: 'Cognitive, emotional, or behavioral efforts to manage stress or distress.' },
+      { name: 'Impulsivity',            def: 'Tendency to act quickly without adequate forethought or consideration of consequences.' },
+      { name: 'Insomnia',               def: 'Difficulty falling asleep, staying asleep, or waking too early, with daytime impact.' },
+      { name: 'Exhaustion',             def: 'Severe physical or mental fatigue and loss of energy.' },
+      { name: 'Hypomania',              def: 'A distinct period of persistently elevated or irritable mood with increased energy or activity, less severe than mania.' },
+      { name: 'Withdrawal',             def: 'A cluster of symptoms occurring after stopping or reducing a substance or behavior, often including discomfort and craving.' },
+      { name: 'Attachment',             def: 'The emotional bond that connects a person to caregivers or close others.' },
+      { name: 'Impairment',             def: 'Reduction in functioning at work, social life, or self-care due to symptoms or illness.' },
+      { name: 'Somatization',           def: 'Psychological distress expressed as physical symptoms.' },
+      { name: 'Amenorrhea',             def: 'Absence of menstrual periods for a clinically relevant period.' },
+      { name: 'Dependence',             def: 'A state of physiological or psychological adaptation in which stopping a substance causes withdrawal or continued use.' },
+      { name: 'Craving',                def: 'Strong desire or urge to use a substance or engage in a behavior.' },
+      { name: 'Tolerance',              def: 'Needing more of a substance to achieve the same effect, or reduced effect with the same dose.' },
+      { name: 'Abstinence',             def: 'Refraining from using a substance or engaging in a behavior.' },
+      { name: 'Drug-psychosis',         def: 'Psychotic symptoms caused by substance use or intoxication/withdrawal.' },
+      { name: 'Deficits',               def: 'Reduced abilities or losses in functioning, cognition, or neurological performance.' },
+      { name: 'Delinquency',            def: 'Repeated rule-breaking or criminal behavior, especially in adolescents.' },
+    ];
+
+    const activeName = new URLSearchParams(window.location.search).get('symptom') || '';
+    const list = document.getElementById('symptom-list');
+
+    SYMPTOMS.sort((a, b) => a.name.localeCompare(b.name));
+
+    SYMPTOMS.forEach(s => {
+      const item = document.createElement('div');
+      item.className = 'symptom-item' + (s.name === activeName ? ' active' : '');
+
+      const dot = document.createElement('div');
+      dot.className = 'symptom-dot-indicator';
+
+      const name = document.createElement('div');
+      name.className = 'symptom-name';
+      name.textContent = s.name;
+
+      const def = document.createElement('div');
+      def.className = 'symptom-def';
+      def.textContent = s.def;
+
+      item.appendChild(dot);
+      item.appendChild(name);
+      item.appendChild(def);
+
+      const navigate = () => {
+        window.location.href = 'index.html?symptom=' + encodeURIComponent(s.name);
+      };
+      dot.addEventListener('click', navigate);
+      name.addEventListener('click', navigate);
+      def.addEventListener('click', navigate);
+
+      list.appendChild(item);
+    });
+  </script>
+
+</body>
+</html>

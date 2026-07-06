@@ -77,6 +77,7 @@ body.inverted .nav-circle {
 
 h1{
   font-family: "MonumentGrotesk", sans-serif;
+  font-weight: 400;
   text-align: left;
   font-size: 48pt;
   line-height: 62pt;
@@ -168,7 +169,7 @@ img{
   font-size: 36pt;
   line-height: 43pt;
   font-family: "MonumentGrotesk", sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   color: #4f3314;
 }
 

@@ -22,7 +22,7 @@ fetch('assets/data/csvjson.json')
         console.log('Loaded JSON data:', data);
 
         // Save the loaded data in a global variable
-        allData = data;
+        allData = data.records;
 
         // Render the catalogue cards
         renderKatalog(allData);
@@ -44,9 +44,6 @@ function renderKatalog(items) {
     // Get the catalogue container from the HTML document
     const katalog = document.getElementById('katalog');
 
-    // Check if the catalogue container exists
-    console.log('Catalogue container:', katalog);
-
     // If the element does not exist, stop the function
     if (!katalog) {
         console.error('Element with id="katalog" was not found');
@@ -59,66 +56,43 @@ function renderKatalog(items) {
         return;
     }
 
-    // Log how many items will be rendered
-    console.log('Number of catalogue items:', items.length);
-
     // This variable will collect all generated HTML
     let html = '';
 
     // Loop through every item in the JSON array
     for (let i = 0; i < items.length; i++) {
 
-        // Get the current item from the array
         const item = items[i];
-
-        // Log the current item for debugging
-        console.log('Rendering item:', i, item);
-
-        // Prepare the author text
-        let authorText = item.Name;
-
-        // Prepare an additional CSS class for unknown authors
-        let authorClass = '';
-
-        // If the author field contains "-", show a nicer text instead
-        if (item.Author === '-') {
-            authorText = 'Autor unbekannt';
-            authorClass = 'unknown';
-        }
-
-        // <div class="card-image">
-        //             <img src="${item['@image']}" alt="${item.Titel}">
-        //         </div>
 
         // Add one card to the HTML string
         html += `
             <div class="card">
-
                 <div class="card-content">
 
                     <div class="card-name">
                         ${item.Name}
                     </div>
 
+                    <div class="card-content-grid">
+                        <div class="card-age-at-interview">Age at interview: ${item['Age at interview'] || '–'}</div>
+                        <div class="card-age-at-diagnose">Age at diagnosis: ${item['Age at diagnosis'] || '–'}</div>
+                    </div>
 
-
-
+                    <div class="card-brief-outline">
+                        ${item['Brief outline'] || ''}
+                    </div>
 
                     <details class="card-details">
-                    <summary class="card-details-summary">${item.Name}'s interview</summary>
-                    <div class="card-details-content">
-
-                     </div>
+                        <summary class="card-details-summary">${item.Name}'s interview</summary>
+                        <div class="card-details-content">
+                            ${item['Interview text'] || ''}
+                        </div>
                     </details>
 
                 </div>
-
             </div>
         `;
     }
-
-    // Log the final generated HTML
-    console.log('Generated HTML:', html);
 
     // Insert the generated HTML into the catalogue container
     katalog.innerHTML = html;

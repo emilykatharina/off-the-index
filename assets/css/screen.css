@@ -5,15 +5,23 @@
 
 body {
   padding: 20px;
-  font-size: 14px;
+  font-size: 28px;
   background-color: #5194ed;;
 }
 
-h1{
-  font-family: Helvetica, sans-serif;
+.site-label {
+  font-family: "RemixB", sans-serif;
+  font-size: 6rem;
+  color: #4f3314;
   text-align: center;
-  font-size: 2rem;
-  font-style: italic;
+  margin-top: 20px;
+}
+
+h1{
+  font-family: "MonumentGrotesk", sans-serif;
+  text-align: center;
+  font-size: 6rem;
+  font-style: normal;
   color: #4f3314;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -25,7 +33,7 @@ img{
 
 .katalog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .card {
@@ -35,8 +43,8 @@ img{
 .card-name {
   display: flex;
   justify-content: center;
-  font-family: Helvetica, sans-serif;
-  font-size: 1.5rem;
+  font-family: "RemixB", sans-serif;
+  font-size: 5rem;
   font-weight: 600;
   margin-top: 20px;
   margin-bottom: 5px;
@@ -45,23 +53,23 @@ img{
 
 .card-content-grid {
   display: flex;
-  align-items: center;      /* gleiche Höhe / vertikal zentriert */
-  justify-content: center; /* links interview, rechts diagnose */
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 
 .card-age-at-interview, .card-age-at-diagnose {
-  font-size: 1.2rem;
+  font-size: 3rem;
   padding-left: 5px;
-  font-family: Helvetica, sans-serif;
+  font-family: "MonumentGrotesk", sans-serif;
   font-weight: 300;
   color: #4f3314;
 }
 
 .card-brief-outline {
   text-align: center;
-  font-family: "Remix";
-  font-size: 1.2rem;
+  font-family: "MonumentGrotesk";
+  font-size: 3rem;
   font-style: normal;
   margin-top: 5px;
   color: #4f3314;
@@ -69,8 +77,8 @@ img{
 
 .card-details {
   text-align: center;
-  font-family: "Remix";
-  font-size: 1.2rem;
+  font-family: "RemixB";
+  font-size: 3rem;
   font-style: normal;
   margin-top: 5px;
   color: #4f3314;
@@ -78,9 +86,13 @@ img{
 
 .card-details-summary {
   text-align: center;
-  font-family: "Remix";
-  font-size: 1.2rem;
-  font-style: italic;
+  font-family: "RemixB";
+  font-size: 3rem;
+  font-style: normal;
   margin-top: 5px;
   color: #4f3314;
+}
+
+details[open] .card-details-summary {
+  font-style: italic;
 }

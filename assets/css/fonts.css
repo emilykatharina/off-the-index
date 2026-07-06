@@ -1,7 +1,39 @@
 @font-face {
-  font-family: "Remix";
-  src: url("../fonts/Remix-Regular.woff2") format("woff2");
+  font-family: "MonumentGrotesk";
+  src: url("../fonts/ABCMonumentGrotesk-Regular-Trial.woff") format("woff");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MonumentGrotesk";
+  src: url("../fonts/ABCMonumentGrotesk-Medium-Trial.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RemixB";
+  src: url("../fonts/RemixBUnlicensedTrial-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RemixB";
+  src: url("../fonts/RemixBUnlicensedTrial-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "RemixB";
+  src: url("../fonts/RemixBUnlicensedTrial-Mono.otf") format("opentype");
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }

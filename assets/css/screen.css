@@ -6,7 +6,7 @@
 
 body {
   padding: 20px;
-  font-size: 11pt;
+  font-size: 9pt;
   background-color: #5194ed;
 }
 
@@ -17,7 +17,7 @@ body {
   background-color: #5194ed;
   padding-top: 20px;
   padding-bottom: 40px;
-  min-height: 160px;
+  min-height: 130px;
 }
 
 body.inverted .site-header {
@@ -41,18 +41,18 @@ body.inverted .site-header {
 }
 
 .nav-circle {
-  width: 23mm;
-  height: 23mm;
+  width: 18mm;
+  height: 18mm;
   border-radius: 50%;
-  border: 3pt solid #4f3314;
+  border: 2pt solid #4f3314;
   background-color: #4f3314;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-family: "MonumentGrotesk", sans-serif;
-  font-size: 12pt;
-  line-height: 15pt;
+  font-size: 10pt;
+  line-height: 12pt;
   color: #5194ed;
   text-decoration: none;
 }
@@ -69,8 +69,8 @@ body.inverted .nav-circle {
 
 .site-label {
   font-family: "RemixB", sans-serif;
-  font-size: 48pt;
-  line-height: 48pt;
+  font-size: 38pt;
+  line-height: 38pt;
   color: #4f3314;
   text-align: left;
 }
@@ -79,8 +79,8 @@ h1{
   font-family: "MonumentGrotesk", sans-serif;
   font-weight: 400;
   text-align: left;
-  font-size: 24pt;
-  line-height: 31pt;
+  font-size: 19pt;
+  line-height: 25pt;
   font-style: normal;
   color: #4f3314;
   margin-top: 10px;
@@ -131,8 +131,8 @@ img{
   width: 100%;
   text-align: left;
   font-family: "RemixB";
-  font-size: 18pt;
-  line-height: 22pt;
+  font-size: 14pt;
+  line-height: 18pt;
   color: #4f3314;
   padding: 15px;
 }
@@ -149,8 +149,8 @@ img{
   display: block;
   text-align: left;
   font-family: "RemixB", sans-serif;
-  font-size: 30pt;
-  line-height: 30pt;
+  font-size: 24pt;
+  line-height: 24pt;
   font-weight: 400;
   letter-spacing: -0.05em;
   margin-top: 10px;
@@ -166,8 +166,8 @@ img{
 }
 
 .card-ages {
-  font-size: 18pt;
-  line-height: 22pt;
+  font-size: 14pt;
+  line-height: 18pt;
   font-family: "MonumentGrotesk", sans-serif;
   font-weight: 400;
   color: #4f3314;
@@ -177,8 +177,8 @@ img{
   text-align: left;
   text-indent: 12mm;
   font-family: "MonumentGrotesk";
-  font-size: 18pt;
-  line-height: 22pt;
+  font-size: 14pt;
+  line-height: 18pt;
   font-style: normal;
   margin-top: 3px;
   color: #4f3314;
@@ -187,8 +187,8 @@ img{
 .card-details {
   text-align: left;
   font-family: "RemixB";
-  font-size: 18pt;
-  line-height: 22pt;
+  font-size: 14pt;
+  line-height: 18pt;
   font-style: normal;
   margin-top: 3px;
   color: #4f3314;
@@ -197,8 +197,8 @@ img{
 .card-details-summary {
   text-align: left;
   font-family: "RemixB";
-  font-size: 18pt;
-  line-height: 22pt;
+  font-size: 14pt;
+  line-height: 18pt;
   font-style: normal;
   margin-top: 3px;
   color: #4f3314;
@@ -210,8 +210,8 @@ details[open] .card-details-summary {
 
 .symptom-dot {
   position: fixed;
-  width: 15mm;
-  height: 15mm;
+  width: 12mm;
+  height: 12mm;
   border-radius: 50%;
   background: #5194ed;
   transform: translate(-50%, -50%);
@@ -221,13 +221,13 @@ details[open] .card-details-summary {
 
 .symptom-label {
   position: absolute;
-  left: calc(15mm + 8px);
+  left: calc(12mm + 8px);
   top: 50%;
   transform: translateY(-50%);
   font-family: "MonumentGrotesk", sans-serif;
   font-weight: 400;
-  font-size: 18pt;
-  line-height: 18pt;
+  font-size: 14pt;
+  line-height: 14pt;
   color: #5194ed;
   white-space: nowrap;
   pointer-events: none;
